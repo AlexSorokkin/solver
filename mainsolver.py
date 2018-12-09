@@ -42,7 +42,7 @@ class Ui_MainWindow(object):
         self.tab_2.setObjectName("tab_2")
         self.label_4 = QtWidgets.QLabel(self.tab_2)
         self.label_4.setGeometry(QtCore.QRect(10, 0, 331, 291))
-        self.label_4.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.label_4.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop)
         self.label_4.setObjectName("label_4")
         self.tabWidget.addTab(self.tab_2, "")
         self.tab_4 = QtWidgets.QWidget()
@@ -52,7 +52,7 @@ class Ui_MainWindow(object):
         self.tab_3.setObjectName("tab_3")
         self.label_5 = QtWidgets.QLabel(self.tab_3)
         self.label_5.setGeometry(QtCore.QRect(0, 0, 351, 281))
-        self.label_5.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.label_5.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop)
         self.label_5.setObjectName("label_5")
         self.pushButton_2 = QtWidgets.QPushButton(self.tab_3)
         self.pushButton_2.setGeometry(QtCore.QRect(234, 0, 111, 23))
@@ -75,10 +75,10 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         self.pushButton.setText(_translate("MainWindow", "Решить"))
         self.label.setText(_translate("MainWindow", "Инструкция к вводу. \n"
-" 1) Ввод цифр и знаков производить через пробел. \n"
-" 2) Неизвестную принять за x (англ). \n"
-" 3) Квадрат неизвестной: x^(2) \n"
-" Пример ввода: 4x^(2) + 4x - 3 = 1"))
+                                                    " 1) Ввод цифр и знаков производить через пробел. \n"
+                                                    " 2) Неизвестную принять за x (англ). \n"
+                                                    " 3) Квадрат неизвестной: x^(2) \n"
+                                                    " Пример ввода: 4x^(2) + 4x - 3 = 1"))
         self.label_2.setText(_translate("MainWindow", "Ответ:"))
         self.label_3.setText(_translate("MainWindow", "..."))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "Калькулятор"))
@@ -94,6 +94,11 @@ class MyWidget(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.pushButton.clicked.connect(self.run)
+
+    def run(self):
+        equation =  self.lineEdit.text()
+        pass
 
 
 app = QApplication(sys.argv)
