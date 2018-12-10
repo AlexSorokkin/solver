@@ -97,8 +97,72 @@ class MyWidget(QMainWindow, Ui_MainWindow):
         self.pushButton.clicked.connect(self.run)
 
     def run(self):
-        equation =  self.lineEdit.text()
-        pass
+        equation = self.lineEdit.text()
+        kvadrx = []
+        onex = []
+        svob_chl = []
+        chislo = 0
+        a = 0
+        b = 0
+        c = 0
+        chl = equation.split(' ')
+        polozhit = True
+        after_equal = False
+        for i in chl:
+            if i == '+':
+                if after_equal:
+                    polozhit = False
+                else:
+                    polozhit = True
+            elif i == '-':
+                if after_equal:
+                    polozhit = True
+                else:
+                    polozhit = False
+            elif i == '=':
+                after_equal = True
+                polozhit = True
+            elif 'x^(2)' in i:
+                chislo = i[:-5]
+                try:
+                    chislo = int(chislo)
+                except Exception:
+                    pass  # Доделать неверный код
+                if polozhit:
+                    kvadrx.append(chislo)
+                else:
+                    chislo = -chislo
+                    kvadrx.append(chislo)
+            elif 'x' in i:
+                chislo = i[:-1]
+                try:
+                    chislo = int(chislo)
+                except Exception:
+                    pass                                           # Доделать неверный код
+                if polozhit:
+                    kvadrx.append(chislo)
+                else:
+                    chislo = -chislo
+                    onex.append(chislo)
+            else:
+                try:
+                    chislo = int(i)
+                except Exception:
+                    pass
+                if not polozhit:
+                    chislo = -chislo
+                svob_chl.append(chislo)
+        for i in kvadrx:
+            a += i
+        for i in onex:
+            b += i
+        for i in svob_chl:
+            c += i
+
+
+
+
+
 
 
 app = QApplication(sys.argv)
