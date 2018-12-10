@@ -32,7 +32,7 @@ class Ui_MainWindow(object):
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(self.tab)
-        self.label_3.setGeometry(QtCore.QRect(160, 60, 150, 21))
+        self.label_3.setGeometry(QtCore.QRect(160, 60, 121, 21))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.label_3.setFont(font)
@@ -43,17 +43,20 @@ class Ui_MainWindow(object):
         self.tab_2.setObjectName("tab_2")
         self.label_4 = QtWidgets.QLabel(self.tab_2)
         self.label_4.setGeometry(QtCore.QRect(10, 0, 331, 291))
-        self.label_4.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop)
+        self.label_4.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self.label_4.setObjectName("label_4")
         self.tabWidget.addTab(self.tab_2, "")
         self.tab_4 = QtWidgets.QWidget()
         self.tab_4.setObjectName("tab_4")
+        self.widget = QtWidgets.QWidget(self.tab_4)
+        self.widget.setGeometry(QtCore.QRect(-1, -1, 351, 291))
+        self.widget.setObjectName("widget")
         self.tabWidget.addTab(self.tab_4, "")
         self.tab_3 = QtWidgets.QWidget()
         self.tab_3.setObjectName("tab_3")
         self.label_5 = QtWidgets.QLabel(self.tab_3)
         self.label_5.setGeometry(QtCore.QRect(0, 0, 351, 281))
-        self.label_5.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop)
+        self.label_5.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self.label_5.setObjectName("label_5")
         self.pushButton_2 = QtWidgets.QPushButton(self.tab_3)
         self.pushButton_2.setGeometry(QtCore.QRect(234, 0, 111, 23))
@@ -69,17 +72,17 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(3)
+        self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         self.pushButton.setText(_translate("MainWindow", "Решить"))
         self.label.setText(_translate("MainWindow", "Инструкция к вводу. \n"
-                                                    " 1) Ввод цифр и знаков производить через пробел. \n"
-                                                    " 2) Неизвестную принять за x (англ). \n"
-                                                    " 3) Квадрат неизвестной: x^(2) \n"
-                                                    " Пример ввода: 4x^(2) + 4x - 3 = 1"))
+" 1) Ввод цифр и знаков производить через пробел. \n"
+" 2) Неизвестную принять за x (англ). \n"
+" 3) Квадрат неизвестной: x^(2) \n"
+" Пример ввода: 4x^(2) + 4x - 3 = 1"))
         self.label_2.setText(_translate("MainWindow", "Ответ:"))
         self.label_3.setText(_translate("MainWindow", "..."))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "Калькулятор"))
@@ -89,6 +92,7 @@ class Ui_MainWindow(object):
         self.label_5.setText(_translate("MainWindow", "История пуста"))
         self.pushButton_2.setText(_translate("MainWindow", "Очистить историю"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("MainWindow", "История"))
+
 
 
 class MyWidget(QMainWindow, Ui_MainWindow):
