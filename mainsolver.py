@@ -1,5 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
+import math
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow
 
 
@@ -127,7 +128,7 @@ class MyWidget(QMainWindow, Ui_MainWindow):
                 try:
                     chislo = int(chislo)
                 except Exception:
-                    pass  # Доделать неверный код
+                    return  # Доделать неверный код
                 if polozhit:
                     kvadrx.append(chislo)
                 else:
@@ -138,7 +139,7 @@ class MyWidget(QMainWindow, Ui_MainWindow):
                 try:
                     chislo = int(chislo)
                 except Exception:
-                    pass                                           # Доделать неверный код
+                    return                                           # Доделать неверный код
                 if polozhit:
                     kvadrx.append(chislo)
                 else:
@@ -158,6 +159,18 @@ class MyWidget(QMainWindow, Ui_MainWindow):
             b += i
         for i in svob_chl:
             c += i
+        discr = b*b - 4*a*c
+        oneotvet = True
+        if discr < 0:
+            return
+        if discr == 0:
+            x1 = -b / 2*a
+        elif discr > 0:
+            oneotvet = False
+            x1 = (-b + math.sqrt(discr)) / 2*a
+            x2 = (-b + math.sqrt(discr)) / 2*a
+        if oneotvet:
+
 
 
 
