@@ -101,6 +101,8 @@ class MyWidget(QMainWindow, Ui_MainWindow):
         equation = self.lineEdit.text()
         kvadrx = []
         onex = []
+        solvenum = 1
+        solve = []
         svob_chl = []
         chislo = 0
         a = 0
@@ -168,17 +170,36 @@ class MyWidget(QMainWindow, Ui_MainWindow):
         x2 = 0
         if a == 0:
             if b == 0:
+                solve.append(''.join([str(solvenum), ') ', 'Переносим всё в левую часть и сокращаем подобное.']))
+                solvenum += 1
+                solve.append(''.join([str(c), ' = 0']))
                 self.label_3.setText("Любой X.")
                 return
             else:
+                solve.append(''.join([str(solvenum), ') ', 'Переносим всё в левую часть и сокращаем подобное.']))
+                solvenum += 1
+                solve.append(''.join([str(b), str(c), ' = 0']))
                 x1 = -c / b
+                solve.append('...')
+                solve.append(''.join([str(solvenum), ') ', 'Вычисляем X.']))
+                solve.append(''.join(['x = ', str(-c), '/', str(b)]))
                 x1 = str(x1)
                 self.label_3.setText(" ".join(['x =', x1]))
                 return
+        solve.append(''.join([str(solvenum), ') ', 'Переносим всё в левую часть и сокращаем подобное.']))
+        solvenum += 1
+        solve.append(''.join([str(solvenum),') ', 'Вычисляем дискриминант.']))
+        solve.append('Формула дискриминанта: D = b*b - 4*a*c')
+        solve.append(''.join(['D = ', str(discr)]))
+        solvenum += 1
+        solve.append('...')
         if discr < 0:
             self.label_3.setText("Нет ответа.")
+            solve.append(''.join([str(solvenum), ') ', 'Для такого D нет решения.']))
             return
         if discr == 0:
+            solve.append(''.join([str(solvenum), ') ', 'Вычисляем единственный х.']))
+            solve.append(''.join(['x = ', str(-b), '/(2*', str(a), ')']))
             x1 = -b / 2*a
             x1 = round(x1, 3)
             x1 = str(x1)
