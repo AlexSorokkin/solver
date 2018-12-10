@@ -32,7 +32,7 @@ class Ui_MainWindow(object):
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(self.tab)
-        self.label_3.setGeometry(QtCore.QRect(160, 60, 121, 21))
+        self.label_3.setGeometry(QtCore.QRect(160, 60, 150, 21))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.label_3.setFont(font)
@@ -161,21 +161,26 @@ class MyWidget(QMainWindow, Ui_MainWindow):
             c += i
         discr = b*b - 4*a*c
         oneotvet = True
+        x1 = 0
+        x2 = 0
         if discr < 0:
             return
         if discr == 0:
             x1 = -b / 2*a
+            x1 = round(x1, 3)
+            x1 = str(x1)
         elif discr > 0:
             oneotvet = False
             x1 = (-b + math.sqrt(discr)) / 2*a
+            x1 = round(x1, 3)
+            x1 = str(x1)
             x2 = (-b + math.sqrt(discr)) / 2*a
+            x2 = round(x2, 3)
+            x2 = str(x2)
         if oneotvet:
-
-
-
-
-
-
+            self.label_3.setText(' '.join(['x =', x1]))
+        else:
+            self.label_3.setText(' '.join(['x1 =', x1, 'x2 =', x2]))
 
 
 app = QApplication(sys.argv)
