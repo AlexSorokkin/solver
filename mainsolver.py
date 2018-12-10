@@ -174,6 +174,8 @@ class MyWidget(QMainWindow, Ui_MainWindow):
                 solvenum += 1
                 solve.append(''.join([str(c), ' = 0']))
                 self.label_3.setText("Любой X.")
+                solve = '\n'.join(solve)
+                self.label_4.setText(solve)
                 return
             else:
                 solve.append(''.join([str(solvenum), ') ', 'Переносим всё в левую часть и сокращаем подобное.']))
@@ -181,13 +183,16 @@ class MyWidget(QMainWindow, Ui_MainWindow):
                 solve.append(''.join([str(b), str(c), ' = 0']))
                 x1 = -c / b
                 solve.append('...')
-                solve.append(''.join([str(solvenum), ') ', 'Вычисляем X.']))
+                solve.append(''.join([str(solvenum), ') ', 'Вычисляем x.']))
                 solve.append(''.join(['x = ', str(-c), '/', str(b)]))
                 x1 = str(x1)
                 self.label_3.setText(" ".join(['x =', x1]))
+                solve = '\n'.join(solve)
+                self.label_4.setText(solve)
                 return
         solve.append(''.join([str(solvenum), ') ', 'Переносим всё в левую часть и сокращаем подобное.']))
         solvenum += 1
+        solve.append('...')
         solve.append(''.join([str(solvenum),') ', 'Вычисляем дискриминант.']))
         solve.append('Формула дискриминанта: D = b*b - 4*a*c')
         solve.append(''.join(['D = ', str(discr)]))
@@ -196,6 +201,8 @@ class MyWidget(QMainWindow, Ui_MainWindow):
         if discr < 0:
             self.label_3.setText("Нет ответа.")
             solve.append(''.join([str(solvenum), ') ', 'Для такого D нет решения.']))
+            solve = '\n'.join(solve)
+            self.label_4.setText(solve)
             return
         if discr == 0:
             solve.append(''.join([str(solvenum), ') ', 'Вычисляем единственный х.']))
@@ -203,14 +210,22 @@ class MyWidget(QMainWindow, Ui_MainWindow):
             x1 = -b / 2*a
             x1 = round(x1, 3)
             x1 = str(x1)
+            solve.append(''.join(['x = ', x1]))
+            solve = '\n'.join(solve)
+            self.label_4.setText(solve)
         elif discr > 0:
             oneotvet = False
+            solve.append(''.join([str(solvenum), ') ', 'Вычисляем х1 и x2.']))
             x1 = (-b + math.sqrt(discr)) / (2*a)
             x1 = round(x1, 3)
             x1 = str(x1)
+            solve.append(''.join(['x1 = (', str(-b), '+ sqrt(', str(discr), '))/(2*', str(a), ') = ', x1]))
             x2 = (-b - math.sqrt(discr)) / (2*a)
             x2 = round(x2, 3)
             x2 = str(x2)
+            solve.append(''.join(['x2 = (', str(-b), '- sqrt(', str(discr), '))/(2*', str(a), ') = ', x2]))
+            solve = '\n'.join(solve)
+            self.label_4.setText(solve)
         if oneotvet:
             self.label_3.setText(' '.join(['x =', x1]))
         else:
