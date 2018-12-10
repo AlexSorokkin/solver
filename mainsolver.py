@@ -122,13 +122,14 @@ class MyWidget(QMainWindow, Ui_MainWindow):
                     polozhit = False
             elif i == '=':
                 after_equal = True
-                polozhit = True
+                polozhit = False
             elif 'x^(2)' in i:
                 chislo = i[:-5]
                 try:
                     chislo = int(chislo)
-                except Exception:
-                    return  # Доделать неверный код
+                except ValueError:
+                    self.label_3.setText("Неправильный ввод.")
+                    return
                 if polozhit:
                     kvadrx.append(chislo)
                 else:
@@ -138,18 +139,20 @@ class MyWidget(QMainWindow, Ui_MainWindow):
                 chislo = i[:-1]
                 try:
                     chislo = int(chislo)
-                except Exception:
-                    return                                           # Доделать неверный код
+                except ValueError:
+                    self.label_3.setText("Неправильный ввод.")
+                    return
                 if polozhit:
-                    kvadrx.append(chislo)
+                    onex.append(chislo)
                 else:
                     chislo = -chislo
                     onex.append(chislo)
             else:
                 try:
                     chislo = int(i)
-                except Exception:
-                    pass
+                except ValueError:
+                    self.label_3.setText('Неправильный ввод.')
+                    return
                 if not polozhit:
                     chislo = -chislo
                 svob_chl.append(chislo)
@@ -163,7 +166,17 @@ class MyWidget(QMainWindow, Ui_MainWindow):
         oneotvet = True
         x1 = 0
         x2 = 0
+        if a == 0:
+            if b == 0:
+                self.label_3.setText("Любой X.")
+                return
+            else:
+                x1 = -c / b
+                x1 = str(x1)
+                self.label_3.setText(" ".join(['x =', x1]))
+                return
         if discr < 0:
+            self.label_3.setText("Нет ответа.")
             return
         if discr == 0:
             x1 = -b / 2*a
@@ -171,10 +184,10 @@ class MyWidget(QMainWindow, Ui_MainWindow):
             x1 = str(x1)
         elif discr > 0:
             oneotvet = False
-            x1 = (-b + math.sqrt(discr)) / 2*a
+            x1 = (-b + math.sqrt(discr)) / (2*a)
             x1 = round(x1, 3)
             x1 = str(x1)
-            x2 = (-b + math.sqrt(discr)) / 2*a
+            x2 = (-b - math.sqrt(discr)) / (2*a)
             x2 = round(x2, 3)
             x2 = str(x2)
         if oneotvet:
