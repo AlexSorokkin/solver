@@ -102,6 +102,7 @@ class MyWidget(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.historyshow()
         self.pushButton.clicked.connect(self.run)
         self.pushButton_2.clicked.connect(self.delhistory)
 
@@ -111,6 +112,25 @@ class MyWidget(QMainWindow, Ui_MainWindow):
         f.write('')
         f.close()
         return
+
+    def historyshow(self):
+        f = open('History.txt', mode='r')
+        h_data = f.read()
+        f.close()
+        h_data = h_data.split('\n')
+        text = []
+        schet = len(h_data)
+        if schet > 3:
+            schet = 3
+        for i in range(schet):
+            q = i + 1
+            find = h_data[-q]
+            find = find.split('@#$')
+            firstr = ''.join([str(q), ') Пример: ', str(find[0])])
+            secstr = ''.join(['Ответ: ', str(find[1])])
+            text.append('\n'.join([firstr, secstr]))
+        text = '\n \n'.join(text)
+        self.label_5.setText(text)
 
     def run(self):
         equation = self.lineEdit.text()
@@ -193,10 +213,16 @@ class MyWidget(QMainWindow, Ui_MainWindow):
                 solve.append(''.join([str(solvenum), ') ', 'Переносим всё в левую часть и сокращаем подобное.']))
                 solvenum += 1
                 solve.append(''.join([str(c), ' = 0']))
-                self.label_3.setText("Любой X.")
-                solve = '\n'.join(solve)
-                self.label_4.setText(solve)
-                self.history(equation, "Любой X.")
+                if c == 0:
+                    self.label_3.setText("Любой X.")
+                    solve = '\n'.join(solve)
+                    self.label_4.setText(solve)
+                    self.history(equation, "Любой X.")
+                else:
+                    self.label_3.setText("Нет такого X.")
+                    solve = '\n'.join(solve)
+                    self.label_4.setText(solve)
+                    self.history(equation, "Нет такого X.")
                 return
             else:
                 solve.append(''.join([str(solvenum), ') ', 'Переносим всё в левую часть и сокращаем подобное.']))
@@ -290,8 +316,21 @@ class MyWidget(QMainWindow, Ui_MainWindow):
         f.close()
         return
 
-    def graph(self,a=0,b=0,c=0):
-        pass
+    def graph(self, a=0, b=0, c=0):
+        mass = [i for i in range(-25, 25)]
+        self.graphicsView.clear()
+        if a == 0 and b == 0:
+            self.graphicsView.plot([i for i in mass],
+                                   [c for i in mass],
+                                   pen='r')
+        elif a == 0:
+            self.graphicsView.plot([(-c + i) / b for i in mass],
+                                   [i for i in mass],
+                                   pen='r')
+        elif a != 0:
+            self.graphicsView.plot([i for i in mass],
+                                   [(a * i * i + b * i + c) for i in mass],
+                                   pen='r')
 
 
 app = QApplication(sys.argv)
