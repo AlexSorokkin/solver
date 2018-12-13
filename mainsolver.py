@@ -2,6 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 import math
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow
+from pyqtgraph import PlotWidget
 
 
 class Ui_MainWindow(object):
@@ -51,6 +52,9 @@ class Ui_MainWindow(object):
         self.widget = QtWidgets.QWidget(self.tab_4)
         self.widget.setGeometry(QtCore.QRect(-1, -1, 351, 291))
         self.widget.setObjectName("widget")
+        self.graphicsView = PlotWidget(self.widget)
+        self.graphicsView.setGeometry(QtCore.QRect(-5, 1, 361, 291))
+        self.graphicsView.setObjectName("graphicsView")
         self.tabWidget.addTab(self.tab_4, "")
         self.tab_3 = QtWidgets.QWidget()
         self.tab_3.setObjectName("tab_3")
@@ -179,6 +183,7 @@ class MyWidget(QMainWindow, Ui_MainWindow):
             b += i
         for i in svob_chl:
             c += i
+        self.graph(a, b, c)
         discr = b * b - 4 * a * c
         oneotvet = True
         x1 = 0
@@ -284,6 +289,9 @@ class MyWidget(QMainWindow, Ui_MainWindow):
         f.write(h_data)
         f.close()
         return
+
+    def graph(self,a=0,b=0,c=0):
+        pass
 
 
 app = QApplication(sys.argv)
