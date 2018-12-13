@@ -120,6 +120,8 @@ class MyWidget(QMainWindow, Ui_MainWindow):
         h_data = h_data.split('\n')
         text = []
         schet = len(h_data)
+        if h_data[0] == '':
+            schet = 0
         if schet > 3:
             schet = 3
         for i in range(schet):
