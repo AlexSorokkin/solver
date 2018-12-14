@@ -102,18 +102,18 @@ class MyWidget(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.historyshow()
-        self.pushButton.clicked.connect(self.run)
+        self.historyshow()  # Вывод истории при входе
+        self.pushButton.clicked.connect(self.run)  # Ответ на кнопки
         self.pushButton_2.clicked.connect(self.delhistory)
 
-    def delhistory(self):
+    def delhistory(self):  # Удаляет историю
         f = open('History.txt', mode='w')
         self.label_5.setText('История пуста')
         f.write('')
         f.close()
         return
 
-    def historyshow(self):
+    def historyshow(self):  # Показывает при входе
         f = open('History.txt', mode='r')
         h_data = f.read()
         f.close()
@@ -136,7 +136,7 @@ class MyWidget(QMainWindow, Ui_MainWindow):
         text = '\n \n'.join(text)
         self.label_5.setText(text)
 
-    def run(self):
+    def run(self):  # Основа программы(высчитывание ответа)
         equation = self.lineEdit.text()
         kvadrx = []
         onex = []
@@ -150,7 +150,7 @@ class MyWidget(QMainWindow, Ui_MainWindow):
         chl = equation.split(' ')
         polozhit = True
         after_equal = False
-        for i in chl:
+        for i in chl:  # Отбор всех чисел и знаков
             if i == '+':
                 if after_equal:
                     polozhit = False
@@ -212,7 +212,7 @@ class MyWidget(QMainWindow, Ui_MainWindow):
         oneotvet = True
         x1 = 0
         x2 = 0
-        if a == 0:
+        if a == 0:  # Вычисление ответов, если нет какого-то параметра
             if b == 0:
                 solve.append(''.join([str(solvenum), ') ', 'Переносим всё в левую часть и сокращаем подобное.']))
                 solvenum += 1
@@ -250,7 +250,7 @@ class MyWidget(QMainWindow, Ui_MainWindow):
         solve.append('Формула дискриминанта: D = b*b - 4*a*c')
         solve.append(''.join(['D = ', str(discr)]))
         solvenum += 1
-        solve.append('...')
+        solve.append('...')  # Далее вычисление ответов квадратного уравнения
         if discr < 0:
             self.label_3.setText("Нет ответа.")
             solve.append(''.join([str(solvenum), ') ', 'Для такого D нет решения.']))
@@ -289,7 +289,7 @@ class MyWidget(QMainWindow, Ui_MainWindow):
             self.label_3.setText(' '.join(['x1 =', x1, 'x2 =', x2]))
             self.history(equation, text)
 
-    def history(self, eq='', ans=''):
+    def history(self, eq='', ans=''):  # Собирает историю из файла History.txt и выводит
         f = open('History.txt', mode='r')
         h_data = f.read()
         f.close()
@@ -320,7 +320,7 @@ class MyWidget(QMainWindow, Ui_MainWindow):
         f.close()
         return
 
-    def graph(self, a=0, b=0, c=0):
+    def graph(self, a=0, b=0, c=0):  # Построение графика
         mass = [i for i in range(-25, 25)]
         self.graphicsView.clear()
         if a == 0 and b == 0:
