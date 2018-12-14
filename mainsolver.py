@@ -122,6 +122,8 @@ class MyWidget(QMainWindow, Ui_MainWindow):
         schet = len(h_data)
         if h_data[0] == '':
             schet = 0
+            self.label_5.setText('История пуста')
+            return
         if schet > 3:
             schet = 3
         for i in range(schet):
